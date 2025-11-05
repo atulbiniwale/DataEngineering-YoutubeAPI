@@ -13,17 +13,12 @@ CHANNEL_HANDLE = "MrBeast"
 def get_playlist_id():
 
     try:
-
         url = f'https://youtube.googleapis.com/youtube/v3/channels?part=contentDetails&forHandle={CHANNEL_HANDLE}&key={API_KEY}'
 
         response = requests.get(url)
-
         response.raise_for_status()
-
         data = response.json()
-
-        channel_items = data['items'][0]
-        channel_plalist_id = channel_items['contentDetails']['relatedPlaylists']['uploads']
+        channel_plalist_id = data['items'][0]['contentDetails']['relatedPlaylists']['uploads']
 
         print(channel_plalist_id)
         return channel_plalist_id
@@ -32,12 +27,9 @@ def get_playlist_id():
         print("An error occurred while fetching the playlist ID.")  
         raise e
     
-
-
 if __name__ == "__main__":
     #print("get_playlist_id() will be executed")
     get_playlist_id()
-
 
 """ 
 else:
